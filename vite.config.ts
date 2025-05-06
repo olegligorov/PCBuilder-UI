@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import dynamicImport from 'vite-plugin-dynamic-import'
+import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 const ReactCompilerConfig = {
@@ -10,10 +11,11 @@ const ReactCompilerConfig = {
 
 export default defineConfig({
     plugins: [
+        tailwindcss(),
         react({
             babel: {
                 plugins: [
-                  ['babel-plugin-react-compiler', ReactCompilerConfig],
+                    ['babel-plugin-react-compiler', ReactCompilerConfig],
                 ],
             },
         }),
