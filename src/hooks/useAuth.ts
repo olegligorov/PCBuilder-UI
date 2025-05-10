@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { setUser, setLoading, setError } from '@/features/auth/authSlice';
-import { signup, login, fetchMe, logout } from '@/api/auth';
+import { signup, login, logout } from '@/api/auth';
 
 export const useSignup = () => {
     const dispatch = useDispatch();
@@ -14,11 +14,17 @@ export const useSignup = () => {
             dispatch(setError(null));
         },
         onSuccess: (data) => {
+            const access = data.accessToken;
+            const refresh = data.refreshToken;
+
+            localStorage.setItem('accessToken', access);
+            localStorage.setItem('refreshToken', refresh);
+
             dispatch(setUser(data.user))
             dispatch(setLoading(false));
         },
         onError: (error: Error) => {
-            dispatch(setError(error.message || 'Signul failed'));
+            dispatch(setError(error.message || 'Signup failed'));
             dispatch(setLoading(false));
         }
     })
@@ -35,6 +41,12 @@ export const useLogin = () => {
             dispatch(setError(null));
         },
         onSuccess: (data) => {
+            const access = data.accessToken;
+            const refresh = data.refreshToken;
+
+            localStorage.setItem('accessToken', access);
+            localStorage.setItem('refreshToken', refresh);
+
             dispatch(setUser(data.user));
             dispatch(setLoading(false));
         },
@@ -46,13 +58,13 @@ export const useLogin = () => {
 };
 
 
-export const useFetchMe = () => {
-    return useQuery({
-        queryKey: ['me'],
-        queryFn: fetchMe,
-        retry: false
-    });
-};
+// export const useFetchMe = () => {
+//     return useQuery({
+//         queryKey: ['me'],
+//         queryFn: fetchMe,
+//         retry: false
+//     });
+// };
 
 // Hook for Logout
 export const useLogout = () => {
@@ -60,11 +72,13 @@ export const useLogout = () => {
     return useMutation({
         mutationFn: logout,
         onMutate: () => {
-            console.log("Here3")
             dispatch(setLoading(true));
             dispatch(setError(null));
         },
         onSuccess: () => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+
             dispatch(setUser(null));
             dispatch(setLoading(false));
         },
