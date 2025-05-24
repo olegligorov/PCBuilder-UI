@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Link } from "react-router-dom"
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   return (
@@ -11,12 +11,12 @@ const HomePage: React.FC = () => {
             Build Your Perfect PC with <span className="text-primary">PCBuilder</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl my-12">
-            Choose the best parts for your budget and performance needs. Whether you're gaming, editing, or building your first rig — we’ve got you covered.
+            Choose the best parts for your budget and performance needs. Whether you're gaming,
+            editing, or building your first rig — we’ve got you covered.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button className="text-lg px-6 py-3 cursor-pointer">
               <Link to="/build">Get Started</Link>
-
             </Button>
             <Button variant="outline" className="text-lg px-6 py-3 cursor-pointer">
               Learn More
@@ -26,9 +26,7 @@ const HomePage: React.FC = () => {
 
         {/* Features Section */}
         <div className="container mx-auto px-6 py-20">
-          <h2 className="text-3xl font-semibold text-center mb-12">
-            Why Use PCBuilder?
-          </h2>
+          <h2 className="text-3xl font-semibold text-center mb-12">Why Use PCBuilder?</h2>
           <div className="grid gap-8 md:grid-cols-3">
             <Card>
               <CardContent className="p-6">
@@ -58,7 +56,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

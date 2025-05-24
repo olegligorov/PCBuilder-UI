@@ -1,13 +1,7 @@
 // src/pages/LoginPage.tsx
 import React, { useRef } from 'react';
 import { Navigate } from 'react-router-dom';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -41,7 +35,9 @@ const LoginPage: React.FC = () => {
           </CardHeader>
           <CardContent className="my-4">
             <div className="my-2">
-              <Label htmlFor="email" className='mb-2'>Email</Label>
+              <Label htmlFor="email" className="mb-2">
+                Email
+              </Label>
               <Input
                 id="email"
                 type="email"
@@ -51,13 +47,10 @@ const LoginPage: React.FC = () => {
               />
             </div>
             <div className="my-2">
-              <Label htmlFor="password" className='mb-2'>Password</Label>
-              <Input
-                id="password"
-                type="password"
-                ref={passwordRef}
-                required
-              />
+              <Label htmlFor="password" className="mb-2">
+                Password
+              </Label>
+              <Input id="password" type="password" ref={passwordRef} required />
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
           </CardContent>
@@ -70,6 +63,6 @@ const LoginPage: React.FC = () => {
       </Card>
     </div>
   );
-}
+};
 
 export default LoginPage;

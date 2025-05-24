@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -7,84 +7,110 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Plus, X } from "lucide-react"
-import { useState } from "react"
+} from '@/components/ui/table';
+import { Plus, X } from 'lucide-react';
+import { useState } from 'react';
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const componentOptions = {
   CPU: [
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 7 5800X", price: 299.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Intel Core i7-12700K", price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Ryzen 9 5900X", price: 449.99, image: "/placeholder.svg?height=50&width=50" },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 7 5800X', price: 299.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Intel Core i7-12700K', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Ryzen 9 5900X', price: 449.99, image: '/placeholder.svg?height=50&width=50' },
   ],
-  "CPU Cooler": [
-    { name: "Corsair H100i RGB", price: 119.99 },
-    { name: "NZXT Kraken X63", price: 149.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Noctua NH-D15", price: 89.99, image: "/placeholder.svg?height=50&width=50" },
+  'CPU Cooler': [
+    { name: 'Corsair H100i RGB', price: 119.99 },
+    { name: 'NZXT Kraken X63', price: 149.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Noctua NH-D15', price: 89.99, image: '/placeholder.svg?height=50&width=50' },
   ],
   Motherboard: [
-    { name: "ASUS ROG Strix B550-F", price: 179.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "MSI MPG Z690", price: 289.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Gigabyte B660 AORUS", price: 219.99, image: "/placeholder.svg?height=50&width=50" },
+    { name: 'ASUS ROG Strix B550-F', price: 179.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'MSI MPG Z690', price: 289.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Gigabyte B660 AORUS', price: 219.99, image: '/placeholder.svg?height=50&width=50' },
   ],
   Memory: [
-    { name: "Corsair Vengeance 16GB DDR4", price: 79.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "G.Skill Trident Z 32GB DDR4", price: 149.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Crucial Ballistix 32GB DDR4", price: 129.99, image: "/placeholder.svg?height=50&width=50" },
+    {
+      name: 'Corsair Vengeance 16GB DDR4',
+      price: 79.99,
+      image: '/placeholder.svg?height=50&width=50',
+    },
+    {
+      name: 'G.Skill Trident Z 32GB DDR4',
+      price: 149.99,
+      image: '/placeholder.svg?height=50&width=50',
+    },
+    {
+      name: 'Crucial Ballistix 32GB DDR4',
+      price: 129.99,
+      image: '/placeholder.svg?height=50&width=50',
+    },
   ],
   Storage: [
-    { name: "Samsung 970 EVO 1TB", price: 129.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "WD Black SN850 2TB", price: 249.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Crucial P5 Plus 1TB", price: 119.99, image: "/placeholder.svg?height=50&width=50" },
+    { name: 'Samsung 970 EVO 1TB', price: 129.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'WD Black SN850 2TB', price: 249.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Crucial P5 Plus 1TB', price: 119.99, image: '/placeholder.svg?height=50&width=50' },
   ],
-  "Video Card": [
-    { name: "NVIDIA RTX 3070", price: 599.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "AMD Radeon RX 6800 XT", price: 649.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "NVIDIA RTX 3080", price: 799.99, image: "/placeholder.svg?height=50&width=50" },
+  'Video Card': [
+    { name: 'NVIDIA RTX 3070', price: 599.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'AMD Radeon RX 6800 XT', price: 649.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'NVIDIA RTX 3080', price: 799.99, image: '/placeholder.svg?height=50&width=50' },
   ],
   Case: [
-    { name: "Corsair 4000D Airflow", price: 94.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "NZXT H510", price: 89.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Lian Li O11 Dynamic", price: 149.99, image: "/placeholder.svg?height=50&width=50" },
+    { name: 'Corsair 4000D Airflow', price: 94.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'NZXT H510', price: 89.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Lian Li O11 Dynamic', price: 149.99, image: '/placeholder.svg?height=50&width=50' },
   ],
-  "Power Supply": [
-    { name: "Corsair RM750x", price: 124.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "EVGA SuperNOVA 850 G5", price: 149.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Seasonic FOCUS GX-750", price: 119.99, image: "/placeholder.svg?height=50&width=50" },
+  'Power Supply': [
+    { name: 'Corsair RM750x', price: 124.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'EVGA SuperNOVA 850 G5', price: 149.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Seasonic FOCUS GX-750', price: 119.99, image: '/placeholder.svg?height=50&width=50' },
   ],
-  "Operating System": [
-    { name: "Windows 11 Home", price: 139.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Windows 11 Pro", price: 199.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: "Windows 10 Home", price: 119.99, image: "/placeholder.svg?height=50&width=50" },
+  'Operating System': [
+    { name: 'Windows 11 Home', price: 139.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Windows 11 Pro', price: 199.99, image: '/placeholder.svg?height=50&width=50' },
+    { name: 'Windows 10 Home', price: 119.99, image: '/placeholder.svg?height=50&width=50' },
   ],
   Monitor: [
-    { name: 'LG 27GL83A-B 27" 1440p', price: 379.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: 'ASUS TUF Gaming VG27AQ 27"', price: 329.99, image: "/placeholder.svg?height=50&width=50" },
-    { name: 'Dell S2721DGF 27" 1440p', price: 399.99, image: "/placeholder.svg?height=50&width=50" },
+    { name: 'LG 27GL83A-B 27" 1440p', price: 379.99, image: '/placeholder.svg?height=50&width=50' },
+    {
+      name: 'ASUS TUF Gaming VG27AQ 27"',
+      price: 329.99,
+      image: '/placeholder.svg?height=50&width=50',
+    },
+    {
+      name: 'Dell S2721DGF 27" 1440p',
+      price: 399.99,
+      image: '/placeholder.svg?height=50&width=50',
+    },
   ],
-}
+};
 
 interface Component {
   name: string;
@@ -94,46 +120,46 @@ interface Component {
 
 const components = [
   {
-    type: "CPU",
+    type: 'CPU',
     price: undefined,
   },
   {
-    type: "CPU Cooler",
+    type: 'CPU Cooler',
     price: undefined,
   },
   {
-    type: "Motherboard",
+    type: 'Motherboard',
     price: undefined,
   },
   {
-    type: "Memory",
+    type: 'Memory',
     price: undefined,
   },
   {
-    type: "Storage",
+    type: 'Storage',
     price: undefined,
   },
   {
-    type: "Video Card",
+    type: 'Video Card',
     price: undefined,
   },
   {
-    type: "Case",
+    type: 'Case',
     price: undefined,
   },
   {
-    type: "Power Supply",
+    type: 'Power Supply',
     price: undefined,
   },
   {
-    type: "Operating System",
+    type: 'Operating System',
     price: undefined,
   },
   {
-    type: "Monitor",
+    type: 'Monitor',
     price: undefined,
   },
-]
+];
 
 interface AddComponentDialogProps {
   dialogOpen: boolean;
@@ -142,8 +168,13 @@ interface AddComponentDialogProps {
   selectComponent: (component: Component) => void;
 }
 
-function AddComponentDialog({ dialogOpen, setDialogOpen, currentComponentType, selectComponent }: AddComponentDialogProps) {
-  const [searchQuery, setSearchQuery] = useState("")
+function AddComponentDialog({
+  dialogOpen,
+  setDialogOpen,
+  currentComponentType,
+  selectComponent,
+}: AddComponentDialogProps) {
+  const [searchQuery, setSearchQuery] = useState('');
 
   const filteredOptions = () => {
     if (!currentComponentType) return [];
@@ -153,8 +184,8 @@ function AddComponentDialog({ dialogOpen, setDialogOpen, currentComponentType, s
     if (!searchQuery.trim()) return options;
 
     const query = searchQuery.toLowerCase();
-    return options.filter(option => option.name.toLowerCase().includes(query))
-  }
+    return options.filter((option) => option.name.toLowerCase().includes(query));
+  };
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogContent>
@@ -194,44 +225,50 @@ function AddComponentDialog({ dialogOpen, setDialogOpen, currentComponentType, s
                 </div>
               ))
             ) : (
-              <><div className="text-center py-6 text-muted-foreground">
-                No components found matching "{searchQuery}"
-              </div></>
+              <>
+                <div className="text-center py-6 text-muted-foreground">
+                  No components found matching "{searchQuery}"
+                </div>
+              </>
             )}
-
           </div>
         </ScrollArea>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 export function BuilderTable() {
-  const [selectedComponents, setSelectedComponents] = useState<Record<string, Component>>({ "CPU": { name: "Intel Core i7-12700K", price: 2, image: "asdf" } })
+  const [selectedComponents, setSelectedComponents] = useState<Record<string, Component>>({
+    CPU: { name: 'Intel Core i7-12700K', price: 2, image: 'asdf' },
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [currentComponentType, setCurrentComponentType] = useState("");
+  const [currentComponentType, setCurrentComponentType] = useState('');
 
-  const totalSum = Object.values(selectedComponents).reduce((sum, component) => sum += component.price, 0)
+  const totalSum = Object.values(selectedComponents).reduce(
+    (sum, component) => (sum += component.price),
+    0,
+  );
 
   const openComponentDialog = (componentType: string) => {
-    setCurrentComponentType(componentType)
-    setDialogOpen(true)
-  }
+    setCurrentComponentType(componentType);
+    setDialogOpen(true);
+  };
 
   const selectComponent = (component: Component) => {
     setSelectedComponents({
       ...selectedComponents,
       [currentComponentType]: component,
-    })
-    setDialogOpen(false)
-  }
+    });
+    setDialogOpen(false);
+  };
 
   const removeComponent = (componentType: string) => {
-    const newSelectedComponents = { ...selectedComponents }
+    const newSelectedComponents = { ...selectedComponents };
     delete newSelectedComponents[componentType];
 
     setSelectedComponents(newSelectedComponents);
-  }
+  };
 
   return (
     <>
@@ -250,7 +287,7 @@ export function BuilderTable() {
           {components.map((component) => (
             <TableRow key={component.type}>
               <TableCell className="font-medium">{component.type}</TableCell>
-              <TableCell>
+              <TableCell className="h-14">
                 {selectedComponents[component.type] ? (
                   <div className="flex items-center gap-2">
                     {/* TODO add image here */}
@@ -259,8 +296,8 @@ export function BuilderTable() {
                       variant="ghost"
                       size="icon"
                       className="h-6 w-6"
-                      onClick={() => removeComponent(component.type)}>
-
+                      onClick={() => removeComponent(component.type)}
+                    >
                       <X className="h-4 w-4" />
                       <span className="sr-only">Remove {component.type}</span>
                     </Button>
@@ -271,7 +308,8 @@ export function BuilderTable() {
                       variant="outline"
                       size="sm"
                       className="h-8 px-2"
-                      onClick={() => openComponentDialog(component.type)}>
+                      onClick={() => openComponentDialog(component.type)}
+                    >
                       <Plus className="h-4 w-4" />
                       Add
                     </Button>
@@ -280,7 +318,8 @@ export function BuilderTable() {
               </TableCell>
               <TableCell></TableCell>
               <TableCell align="right">
-                {selectedComponents[component.type]?.price !== undefined && `$${selectedComponents[component.type]!.price}`}
+                {selectedComponents[component.type]?.price !== undefined &&
+                  `$${selectedComponents[component.type]!.price}`}
               </TableCell>
               {/* <TableCell>{invoice.paymentMethod}</TableCell>
             <TableCell className="text-right">{invoice.totalAmount}</TableCell> */}
@@ -296,9 +335,14 @@ export function BuilderTable() {
         </TableFooter>
       </Table>
 
-      <AddComponentDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} currentComponentType={currentComponentType} selectComponent={selectComponent} />
+      <AddComponentDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        currentComponentType={currentComponentType}
+        selectComponent={selectComponent}
+      />
     </>
-  )
+  );
 }
 
 // scroll area

@@ -4,12 +4,14 @@ import path from 'path'
 import dynamicImport from 'vite-plugin-dynamic-import'
 import tailwindcss from '@tailwindcss/vite';
 
-// https://vitejs.dev/config/
 const ReactCompilerConfig = {
-    target: '19' // '17' | '18' | '19'
+    target: '19' 
 };
 
 export default defineConfig({
+    define: {
+    'process.env': {}
+  },
     plugins: [
         tailwindcss(),
         react({

@@ -25,7 +25,7 @@ export const authRoutes: AppRoute[] = [
     element: <SignupPage />,
     protected: false,
   },
-]
+];
 
 export const routeConfig: AppRoute[] = [
   {
@@ -54,4 +54,3 @@ export const routeConfig: AppRoute[] = [
   //   protected: true,
   // },
 ];
-
