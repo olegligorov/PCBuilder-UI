@@ -1,5 +1,5 @@
 import { login, logout, signup } from '@/api/auth';
-import { setError, setLoading, setSignedIn } from '@/features/auth/authSlice';
+import { setError, setLoading, setSignedIn, setUser } from '@/features/auth/authSlice';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ export const useSignup = () => {
       localStorage.setItem('accessToken', access);
       localStorage.setItem('refreshToken', refresh);
 
-      // setUser(data.user)
+      dispatch(setUser(data.user));
       dispatch(setSignedIn(true));
       dispatch(setLoading(false));
 
@@ -53,7 +53,7 @@ export const useLogin = () => {
       localStorage.setItem('accessToken', access);
       localStorage.setItem('refreshToken', refresh);
 
-      // setUser(data.user)
+      dispatch(setUser(data.user));
       dispatch(setSignedIn(true));
       dispatch(setLoading(false));
 
@@ -79,7 +79,7 @@ export const useLogout = () => {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
 
-      // dispatch(setUser(null));
+      dispatch(setUser(null));
       dispatch(setSignedIn(false));
       dispatch(setLoading(false));
     },

@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { ThemeProvider } from './components/theme-provider';
+import LoadingPage from './pages/LoadingPage';
 import { AppRoute, authRoutes, routeConfig } from './routes/routeConfig';
 import { RootState } from './store';
-import LoadingPage from './pages/LoadingPage';
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   // TODO Fix the protected routes

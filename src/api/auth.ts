@@ -6,14 +6,11 @@
 // withCredentials: true,
 // });
 
+import { User } from '@/interfaces';
 import api from '@/services/axios';
 
 export interface SignupResponse {
-  user: {
-    id: string;
-    email: string;
-    type: string;
-  };
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
@@ -35,5 +32,5 @@ export const login = async (data: { email: string; password: string }) => {
 };
 
 export const logout = async () => {
-  await api.post('/users/logout');
+  await api.post('/users/logout', {});
 };
