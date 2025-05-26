@@ -34,12 +34,12 @@ api.interceptors.response.use(
             refresh: refreshToken,
           },
         );
-        const { access } = response.data;
+        const { accessToken } = response.data;
 
-        localStorage.setItem('accessToken', access);
+        localStorage.setItem('accessToken', accessToken);
 
         // Retry the original request with the new token
-        originalRequest.headers.Authorization = `Bearer ${access}`;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axios(originalRequest);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {

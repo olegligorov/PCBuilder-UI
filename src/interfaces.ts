@@ -6,4 +6,14 @@ export interface User {
   userType?: UserType;
 }
 
+export type Component = {
+  _id: string;
+  currency: string;
+  discounted_price: string;
+  source: string;
+  standard_price: string;
+  title: string;
+  type: string;
+};
+
 export type UserType = 'USER' | 'ADMIN';
