@@ -7,7 +7,7 @@
 // });
 
 import { User } from '@/interfaces';
-import api from '@/services/axios';
+import api, { rawApi } from '@/services/axios';
 
 export interface SignupResponse {
   user: User;
@@ -32,5 +32,14 @@ export const login = async (data: { email: string; password: string }) => {
 };
 
 export const logout = async () => {
-  await api.post('/users/logout', {});
+  const accessToken = localStorage.getItem('accessToken');
+  await rawApi.post(
+    '/users/logout',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
 };

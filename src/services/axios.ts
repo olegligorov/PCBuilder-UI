@@ -4,6 +4,10 @@ const api = axios.create({
   baseURL: `${import.meta.env.VITE_BASE_API_URL}/api`,
 });
 
+export const rawApi = axios.create({
+  baseURL: `${import.meta.env.VITE_BASE_API_URL}/api`,
+});
+
 // Add a request interceptor
 api.interceptors.request.use(
   (config) => {
@@ -21,6 +25,10 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    if (originalRequest?.skipAuthRefresh) {
+      return Promise.reject(error);
+    }
+
     // If the error status is 401 and there is no originalRequest._retry flag,
     // it means the token has expired and we need to refresh it
     if (error?.response?.status === 401 && !originalRequest._retry) {
@@ -28,8 +36,9 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
+        console.log('Sending refresh', `${import.meta.env.VITE_BASE_API_URL}/api/users/refresh`);
         const response = await axios.post(
-          `${import.meta.env.VITE_BASE_API_URL}/api/users/refresh/`,
+          `${import.meta.env.VITE_BASE_API_URL}/api/users/refresh`,
           {
             refresh: refreshToken,
           },

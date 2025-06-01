@@ -8,7 +8,7 @@ import { useLogout } from '@/hooks/useAuth';
 
 const Navbar: React.FC = () => {
   const { signedIn } = useSelector((state: RootState) => state.auth);
-  console.log(signedIn);
+
   const logout = useLogout();
 
   const handleLogoutClick = async () => {

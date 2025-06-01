@@ -7,19 +7,12 @@ type Build = {
 };
 
 const createBuild = async (newBuild: Build) => {
-  const response = await api.post('/builds', newBuild);
+  const response = await api.post('/configurations', newBuild);
   return response.data;
 };
 
 export function useCreateBuild() {
   return useMutation({
     mutationFn: createBuild,
-    onSuccess: (data) => {
-      console.log('Build created:', data);
-    },
-
-    onError: (error) => {
-      console.error('Failed to create build:', error);
-    },
   });
 }

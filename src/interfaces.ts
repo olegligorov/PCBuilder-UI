@@ -16,4 +16,9 @@ export type Component = {
   type: string;
 };
 
+export interface ComponentMetadata {
+  type: string;
+  technicalType: string;
+}
+
 export type UserType = 'USER' | 'ADMIN';
